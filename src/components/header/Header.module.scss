@@ -1,4 +1,8 @@
 .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0px 41px;
     height: 72px;
     background-color: var(--primary-color);
 }

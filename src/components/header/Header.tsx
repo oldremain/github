@@ -1,11 +1,15 @@
-import s from "./Header.module.scss";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
+import React from "react";
+import Logo from "./logo/Logo";
+import SearchBar from "./searchbar/SearchBar";
 
-const Header = () => {
+import s from "./Header.module.scss";
+
+const Header: React.FC = () => {
     return (
         <>
             <header className={s.header}>
                 <Logo />
+                <SearchBar />
             </header>
         </>
     );
