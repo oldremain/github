@@ -10,7 +10,7 @@ const SearchBar: React.FC = () => {
                     <SearchIcon />
                 </button>
                 <label htmlFor="search-input" hidden={true}>
-                    Search
+                    SearchBox by username
                 </label>
                 <input
                     type="text"
