@@ -1,7 +1,7 @@
 import React from "react";
 import profile from "../../../../assets/profile.png";
 
-import s from "../ProfileInfo.module.scss";
+import s from "../Profile.module.scss";
 
 const ProfileImage: React.FC = () => {
     return (

@@ -1,0 +1,55 @@
+.main_profile {
+}
+
+.profile_img {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 28px;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.profile_info {
+    display: flex;
+    flex-direction: column;
+}
+.profile_name {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 130%;
+    margin-bottom: 12px;
+}
+.profile_userName {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 122%;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.profile_statistic {
+    display: flex;
+    gap: 16px;
+}
+
+.follower {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--text-color);
+
+    span {
+        margin-left: 8px;
+    }
+}
+.profile_followers {
+    composes: follower;
+}
+.profile_following {
+    composes: follower;
+}

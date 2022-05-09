@@ -15,6 +15,7 @@ const SearchBar: React.FC = () => {
                 <input
                     type="text"
                     id="search-input"
+                    placeholder="Enter GitHub username"
                     autoComplete="off"
                     className={s.search_input}
                 />

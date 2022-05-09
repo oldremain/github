@@ -1,8 +1,10 @@
 .main {
+    height: 100%;
     padding: 40px 56px;
 }
 
 .main_container {
     display: grid;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 292px 1fr;
+    column-gap: 85px;
 }
