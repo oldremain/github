@@ -1,23 +1,26 @@
-import React, { useState } from "react";
-import { useAppDispatch } from "../../../hooks/hooks";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { updateValue } from "../../../features/searchField/searchFieldSlice";
 import { fetchUser } from "../../../features/user/userSlice";
+import { fetchRepos } from "../../../features/repos/reposSlice";
 
 import { ReactComponent as SearchIcon } from "../../../assets/search.svg";
 
 import s from "./SearchBar.module.scss";
 
 const SearchBar: React.FC = () => {
-    const [userName, setUserName] = useState<string>("");
+    const searchFieldValue = useAppSelector((state) => state.searchField.value);
     const dispatch = useAppDispatch();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserName(e.target.value);
+        dispatch(updateValue(e.target.value));
     };
 
     const formHandler = (e: React.FormEvent<EventTarget>) => {
         e.preventDefault();
 
-        dispatch(fetchUser(userName));
+        dispatch(fetchUser(searchFieldValue));
+        dispatch(fetchRepos(searchFieldValue));
     };
 
     return (
@@ -30,7 +33,7 @@ const SearchBar: React.FC = () => {
                     Searchfield by username
                 </label>
                 <input
-                    value={userName}
+                    value={searchFieldValue}
                     onChange={handleInputChange}
                     type="text"
                     id="search-input"

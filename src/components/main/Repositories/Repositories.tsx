@@ -8,6 +8,8 @@ import s from "./Repositories.module.scss";
 
 const Repositories: React.FC = () => {
     const { public_repos } = useAppSelector((state) => state.user);
+    const repositories = useAppSelector((state) => state.repos.list);
+
     return (
         <>
             <div className={s.main_repositories}>
@@ -15,13 +17,9 @@ const Repositories: React.FC = () => {
                     Repositories ({public_repos})
                 </h3>
                 <div className={s.repositories_layout}>
-                    <RepositoryCard />
-                    <RepositoryCard />
-                    <RepositoryCard />
-                    <RepositoryCard />
-                    <RepositoryCard />
-                    <RepositoryCard />
-                    <RepositoryCard />
+                    {repositories.map((repo) => (
+                        <RepositoryCard key={repo.id} {...repo} />
+                    ))}
 
                     <Pagination
                         count={10}

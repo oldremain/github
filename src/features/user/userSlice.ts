@@ -1,7 +1,7 @@
-import axios from "axios";
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-type User = {
+type UserType = {
     name?: string;
     login?: string;
     followers?: number;
@@ -11,7 +11,7 @@ type User = {
     html_url?: string;
 };
 
-const initialState: User = {
+const initialState: UserType = {
     name: undefined,
     login: undefined,
     followers: undefined,
@@ -24,7 +24,7 @@ const initialState: User = {
 const URL = "https://api.github.com/users/";
 
 export const fetchUser = createAsyncThunk<
-    User,
+    UserType,
     string,
     { rejectValue: string }
 >("user/fetchUser", async (nikname, { rejectWithValue }) => {
@@ -63,16 +63,16 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUser.pending, (state, action) => {
-                console.log("Pending started");
+                console.log("User pending");
             })
             .addCase(
                 fetchUser.fulfilled,
-                (state, action: PayloadAction<User>) => {
+                (state, action: PayloadAction<UserType>) => {
                     return action.payload;
                 }
             )
             .addCase(fetchUser.rejected, (state, action) => {
-                console.log("Rejected");
+                console.log("User rejected");
             });
     },
 });

@@ -1,15 +1,15 @@
 import React from "react";
+import { RepoType } from "../../../../features/repos/reposSlice";
 
 import s from "../Repositories.module.scss";
 
-const RepositoryCard: React.FC = () => {
+const RepositoryCard: React.FC<RepoType> = ({ name, description }) => {
     return (
         <>
             <div className={s.repository_card}>
-                <h4 className={s.repository_name}>react-hot-loader</h4>
+                <h4 className={s.repository_name}>{name}</h4>
                 <p className={s.repository_description}>
-                    Tweak React components in real time. Deprecated: use Fast
-                    Refresh instead.
+                    {description ? description : "not description yet"}
                 </p>
             </div>
         </>
