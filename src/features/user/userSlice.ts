@@ -8,6 +8,7 @@ type User = {
     following?: number;
     public_repos?: number;
     avatar_url?: string;
+    html_url?: string;
 };
 
 const initialState: User = {
@@ -17,6 +18,7 @@ const initialState: User = {
     following: undefined,
     public_repos: undefined,
     avatar_url: undefined,
+    html_url: undefined,
 };
 
 const URL = "https://api.github.com/users/";
@@ -28,8 +30,15 @@ export const fetchUser = createAsyncThunk<
 >("user/fetchUser", async (nikname, { rejectWithValue }) => {
     try {
         const response = await axios.get(`${URL}${nikname}`);
-        const { name, login, followers, following, public_repos, avatar_url } =
-            response.data;
+        const {
+            name,
+            login,
+            followers,
+            following,
+            public_repos,
+            avatar_url,
+            html_url,
+        } = response.data;
 
         const user = {
             name,
@@ -38,6 +47,7 @@ export const fetchUser = createAsyncThunk<
             following,
             public_repos,
             avatar_url,
+            html_url,
         };
 
         return user;
