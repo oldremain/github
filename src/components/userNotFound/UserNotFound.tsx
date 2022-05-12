@@ -8,9 +8,7 @@ const UserNotFound: React.FC = () => {
         <div className={s.notFoundPage}>
             <div className={s.notFoundPage_content}>
                 <NotFoundIcon />
-                <div className={s.notFoundPage_text}>
-                    Start with searching a GitHub user
-                </div>
+                <div className={s.notFoundPage_text}>User not found</div>
             </div>
         </div>
     );
