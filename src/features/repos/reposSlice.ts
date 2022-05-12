@@ -12,6 +12,7 @@ export type RepoType = {
 
 type ReposStateType = {
     list: RepoType[];
+    loading: boolean;
 };
 
 export const fetchRepos = createAsyncThunk<
@@ -35,6 +36,7 @@ export const fetchRepos = createAsyncThunk<
 
 const initialState: ReposStateType = {
     list: [],
+    loading: false,
 };
 
 const reposSlice = createSlice({
@@ -45,10 +47,12 @@ const reposSlice = createSlice({
         builder
             .addCase(fetchRepos.pending, (state, action) => {
                 console.log("Repos is pending");
+                state.loading = true;
             })
             .addCase(
                 fetchRepos.fulfilled,
                 (state, action: PayloadAction<RepoType[]>) => {
+                    state.loading = false;
                     state.list = action.payload;
                 }
             )

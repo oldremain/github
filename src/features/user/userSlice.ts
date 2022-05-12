@@ -11,14 +11,22 @@ type UserType = {
     html_url: string;
 };
 
-const initialState: UserType = {
-    name: "",
-    login: "",
-    followers: 0,
-    following: 0,
-    public_repos: 0,
-    avatar_url: "",
-    html_url: "",
+type userStateType = {
+    user: UserType;
+    loading: boolean;
+};
+
+const initialState: userStateType = {
+    user: {
+        name: "",
+        login: "",
+        followers: 0,
+        following: 0,
+        public_repos: 0,
+        avatar_url: "",
+        html_url: "",
+    },
+    loading: false,
 };
 
 const URL = "https://api.github.com/users/";
@@ -63,12 +71,13 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUser.pending, (state, action) => {
-                console.log("User pending");
+                state.loading = true;
             })
             .addCase(
                 fetchUser.fulfilled,
                 (state, action: PayloadAction<UserType>) => {
-                    return action.payload;
+                    state.loading = false;
+                    state.user = action.payload;
                 }
             )
             .addCase(fetchUser.rejected, (state, action) => {

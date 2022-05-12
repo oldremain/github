@@ -21,6 +21,7 @@ const SearchBar: React.FC = () => {
 
         dispatch(fetchUser(searchFieldValue));
         dispatch(fetchRepos(searchFieldValue));
+        dispatch(updateValue(""));
     };
 
     return (

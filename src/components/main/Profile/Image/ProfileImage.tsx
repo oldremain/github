@@ -4,7 +4,7 @@ import { useAppSelector } from "../../../../hooks/hooks";
 import s from "../Profile.module.scss";
 
 const ProfileImage: React.FC = () => {
-    const { avatar_url } = useAppSelector((state) => state.user);
+    const { avatar_url } = useAppSelector((state) => state.user.user);
 
     return (
         <>

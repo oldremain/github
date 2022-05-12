@@ -18,7 +18,7 @@ const getFollowerCount = (value: number): string => {
 
 const Info: React.FC = () => {
     const { name, login, followers, following, public_repos, avatar_url } =
-        useAppSelector((state) => state.user);
+        useAppSelector((state) => state.user.user);
 
     return (
         <>

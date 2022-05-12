@@ -7,7 +7,7 @@ import Pagination from "@mui/material/Pagination";
 import s from "./Repositories.module.scss";
 
 const Repositories: React.FC = () => {
-    const { public_repos } = useAppSelector((state) => state.user);
+    const { public_repos } = useAppSelector((state) => state.user.user);
     const repos = useAppSelector((state) => state.repos.list);
 
     return (
