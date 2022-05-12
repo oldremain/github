@@ -8,7 +8,7 @@ import s from "./Repositories.module.scss";
 
 const Repositories: React.FC = () => {
     const { public_repos } = useAppSelector((state) => state.user);
-    const repositories = useAppSelector((state) => state.repos.list);
+    const repos = useAppSelector((state) => state.repos.list);
 
     return (
         <>
@@ -17,7 +17,7 @@ const Repositories: React.FC = () => {
                     Repositories ({public_repos})
                 </h3>
                 <div className={s.repositories_layout}>
-                    {repositories.map((repo) => (
+                    {repos.map((repo) => (
                         <RepositoryCard key={repo.id} {...repo} />
                     ))}
 

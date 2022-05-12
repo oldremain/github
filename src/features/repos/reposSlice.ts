@@ -35,9 +35,6 @@ export const fetchRepos = createAsyncThunk<
 
 const initialState: ReposStateType = {
     list: [],
-    // name: undefined,
-    // description: null,
-    // html_url: undefined,
 };
 
 const reposSlice = createSlice({

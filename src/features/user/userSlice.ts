@@ -2,23 +2,23 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 type UserType = {
-    name?: string;
-    login?: string;
-    followers?: number;
-    following?: number;
-    public_repos?: number;
-    avatar_url?: string;
-    html_url?: string;
+    name: string;
+    login: string;
+    followers: number;
+    following: number;
+    public_repos: number;
+    avatar_url: string;
+    html_url: string;
 };
 
 const initialState: UserType = {
-    name: undefined,
-    login: undefined,
-    followers: undefined,
-    following: undefined,
-    public_repos: undefined,
-    avatar_url: undefined,
-    html_url: undefined,
+    name: "",
+    login: "",
+    followers: 0,
+    following: 0,
+    public_repos: 0,
+    avatar_url: "",
+    html_url: "",
 };
 
 const URL = "https://api.github.com/users/";
