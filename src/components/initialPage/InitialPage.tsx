@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
+import Pagination from "../pagination/Pagination";
 
 import s from "./InitialPage.module.scss";
 
@@ -12,6 +13,7 @@ const InitialPage: React.FC = () => {
                     Start with searching a GitHub user
                 </div>
             </div>
+            <Pagination />
         </div>
     );
 };

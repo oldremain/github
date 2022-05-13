@@ -1,5 +1,15 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+//import delayAdapterEnhancer from "axios-delay";
+
+// const api: AxiosInstance = axios.create({
+//     adapter: delayAdapterEnhancer(axios.defaults.adapter),
+// });
+
+//   api.get('url', {
+//     delay: 1000 // delay 1 second
+//   });
+// Добавил таймаут в axios.get()
 
 type UserType = {
     name: string;
