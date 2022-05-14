@@ -17,14 +17,28 @@ const getFollowerCount = (value: number): string => {
 };
 
 const Info: React.FC = () => {
-    const { name, login, followers, following, public_repos, avatar_url } =
-        useAppSelector((state) => state.user.user);
+    const {
+        name,
+        login,
+        followers,
+        following,
+        public_repos,
+        avatar_url,
+        html_url,
+    } = useAppSelector((state) => state.user.user);
 
     return (
         <>
             <div className={s.profile_info}>
                 <span className={s.profile_name}>{name}</span>
-                <span className={s.profile_userName}>{login}</span>
+                <a
+                    href={html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={s.profile_userName}
+                >
+                    {login}
+                </a>
                 <div className={s.profile_statistic}>
                     <div className={s.profile_followers}>
                         <Followers />

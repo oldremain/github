@@ -30,6 +30,8 @@ export const fetchRepos = createAsyncThunk<
     { rejectValue: string }
 >("repos/fetchRepos", async ({ searchFieldValue, page = 1 }, thunkApi) => {
     try {
+        //await new Promise((resolve) => setTimeout(() => resolve(1), 5000));
+
         const response = await axios.get(
             `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
         );
