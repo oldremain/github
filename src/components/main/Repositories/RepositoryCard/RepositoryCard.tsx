@@ -8,9 +8,7 @@ const RepositoryCard: React.FC<RepoType> = ({ name, description }) => {
         <>
             <div className={s.repository_card}>
                 <h4 className={s.repository_name}>{name}</h4>
-                <p className={s.repository_description}>
-                    {description ? description : "Not description yet"}
-                </p>
+                <p className={s.repository_description}>{description}</p>
             </div>
         </>
     );

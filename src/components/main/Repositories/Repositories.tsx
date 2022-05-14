@@ -8,8 +8,8 @@ import Pagination from "../../pagination/Pagination";
 import s from "./Repositories.module.scss";
 
 const Repositories: React.FC = () => {
-    const { public_repos } = useAppSelector((state) => state.user.user);
     const repos = useAppSelector((state) => state.repos.list);
+    const { public_repos } = useAppSelector((state) => state.user.user);
 
     return (
         <>
@@ -21,16 +21,8 @@ const Repositories: React.FC = () => {
                     {repos.map((repo) => (
                         <RepositoryCard key={repo.id} {...repo} />
                     ))}
-                    {/* 
-                    <Pagination
-                        count={10}
-                        siblingCount={3}
-                        shape="rounded"
-                        color="primary"
-                        size="small"
-                    /> */}
-                    {/* <Pagination /> */}
                 </div>
+                <Pagination public_repos={public_repos} />
             </div>
         </>
     );

@@ -20,7 +20,7 @@ const SearchBar: React.FC = () => {
         e.preventDefault();
 
         dispatch(fetchUser(searchFieldValue));
-        dispatch(fetchRepos(searchFieldValue));
+        dispatch(fetchRepos({ searchFieldValue }));
         dispatch(updateValue(""));
     };
 

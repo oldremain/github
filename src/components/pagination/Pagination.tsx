@@ -1,42 +1,72 @@
-import React from "react";
-import ReactPaginate from "react-paginate";
+import React, { useState } from "react";
 
 import s from "./Pagination.module.scss";
-import { ReactComponent as ArrowLeft } from "../../assets/arrowLeft.svg";
-import { ReactComponent as ArrowRight } from "../../assets/arrowRight.svg";
+import MuiPagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import PaginationItem from "@mui/material/PaginationItem";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+//import { queryParams } from "../../enums/queryParams";
+import { fetchRepos, PAGE_SIZE } from "../../features/repos/reposSlice";
 
-type ClickParamType = {
-    selected: number;
-};
+interface IPaginationProps {
+    public_repos: number;
+}
 
-const Pagination: React.FC = () => {
-    const handlePageClick = ({ selected }: ClickParamType) => {
-        console.log(selected + 1);
+const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
+    //const [page, setPage] = useState<number>(0);//нумерация страниц начинается с нуля
+
+    const dispatch = useAppDispatch();
+    const currentPage = useAppSelector((state) => state.repos.page);
+    console.log(currentPage);
+
+    const searchFieldValue = useAppSelector((state) => state.user.user.login);
+    const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
+        console.log(page);
+        dispatch(fetchRepos({ searchFieldValue, page }));
     };
 
     return (
-        <div className={s.pagination}>
-            <ReactPaginate
-                pageCount={50}
-                initialPage={0}
-                marginPagesDisplayed={1}
-                // pageRangeDisplayed={3}
-                onPageChange={handlePageClick}
-                containerClassName={s.pagination_list}
-                pageClassName={s.list_item}
-                activeClassName={s.active_item}
-                activeLinkClassName={s.active_link}
-                pageLinkClassName={s.pagination_link}
-                breakClassName={s.break_item}
-                breakLinkClassName={s.break_link}
-                nextClassName={s.next_item}
-                nextLinkClassName={s.next_link}
-                previousClassName={s.previous_item}
-                previousLinkClassName={s.previous_link}
-                previousLabel={<ArrowLeft />}
-                nextLabel={<ArrowRight />}
-            ></ReactPaginate>
-        </div>
+        <Stack
+            justifyContent="flex-end"
+            alignItems="center"
+            direction="row"
+            sx={{ mt: "24px" }}
+        >
+            <div className={s.items_qty}>
+                {!!currentPage && currentPage * PAGE_SIZE - 3}-
+                {!!currentPage && currentPage * PAGE_SIZE} of {public_repos}{" "}
+                items
+            </div>
+            <MuiPagination
+                count={Math.ceil(public_repos / PAGE_SIZE)}
+                page={currentPage ? currentPage : 0}
+                onChange={handleChange}
+                siblingCount={1}
+                boundaryCount={2}
+                shape="rounded"
+                color="primary"
+                size="small"
+                renderItem={(item) => {
+                    if (item.type === "next" || item.type === "previous") {
+                        return (
+                            <PaginationItem
+                                sx={{ color: "#808080", fontSize: "14px" }}
+                                {...item}
+                            />
+                        );
+                    }
+                    return (
+                        <PaginationItem
+                            sx={{
+                                color: "#808080",
+                                fontSize: "14px",
+                            }}
+                            {...item}
+                        />
+                    );
+                }}
+            />
+        </Stack>
     );
 };
 

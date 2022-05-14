@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { queryParams } from "../../enums/queryParams";
+//import { queryParams } from "../../enums/queryParams";
 
-// const PAGE_SIZE: number = 4;
-// const PAGE = 1;
+export const PAGE_SIZE: number = 4;
 
 const URL = "https://api.github.com/users"; //'https://api.github.com/users/oldremain/repos'
 
@@ -16,17 +15,23 @@ export type RepoType = {
 
 type ReposStateType = {
     list: RepoType[];
+    page?: number;
     loading: boolean;
+};
+
+type QueryParamsType = {
+    searchFieldValue: string;
+    page?: number;
 };
 
 export const fetchRepos = createAsyncThunk<
     RepoType[],
-    string,
+    QueryParamsType,
     { rejectValue: string }
->("repos/fetchRepos", async (nikname, { rejectWithValue }) => {
+>("repos/fetchRepos", async ({ searchFieldValue, page = 1 }, thunkApi) => {
     try {
         const response = await axios.get(
-            `${URL}/${nikname}/repos?per_page=${queryParams.PAGE_SIZE}&page=${queryParams.PAGE}&sort=created`
+            `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
         );
         const reposArray = response.data.map((item: any) => {
             const { id, name, description, html_url } = item;
@@ -34,25 +39,32 @@ export const fetchRepos = createAsyncThunk<
             return repo;
         });
 
+        thunkApi.dispatch(setPage(page));
+
         return reposArray;
     } catch (e: any) {
-        return rejectWithValue(e.message);
+        return thunkApi.rejectWithValue(e.message);
     }
 });
 
 const initialState: ReposStateType = {
     list: [],
+    page: undefined,
     loading: false,
 };
 
 const reposSlice = createSlice({
     name: "repos",
     initialState,
-    reducers: {},
+    reducers: {
+        setPage(state, action: PayloadAction<number>) {
+            state.page = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchRepos.pending, (state, action) => {
-                console.log("Repos is pending");
+                console.log("Repos is pending", action.payload);
                 state.loading = true;
             })
             .addCase(
@@ -67,5 +79,7 @@ const reposSlice = createSlice({
             });
     },
 });
+
+export const { setPage } = reposSlice.actions;
 
 export default reposSlice.reducer;
