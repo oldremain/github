@@ -1,8 +1,10 @@
 .pagination_list {
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
+    cursor: pointer;
 }
 .pagination_link {
     font-weight: 400;
@@ -13,26 +15,24 @@
 .break_link {
     color: var(--secondary-color);
 }
-.previous_item {
-    //margin-right: 16px;
-}
-.next_item {
-    // margin-left: 16px;
-}
+// .next_item,
+// .previous_item,
+// .break_item,
+// .list_item {
+//     cursor: pointer;
+// }
 .active_item {
     background-color: var(--primary-color);
     padding: 2px 6px;
     border-radius: 3px;
 }
-.active_link{
+.active_link {
     color: var(--white-color);
 }
 // .next_link {
 //     color: yellow;
 // }
-// .list_item {
-//     font-weight: bolder;
-// }
+
 // .break_item {
 //     font-size: 30px;
 // }

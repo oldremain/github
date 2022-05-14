@@ -20,7 +20,7 @@ const Pagination: React.FC = () => {
                 pageCount={50}
                 initialPage={0}
                 marginPagesDisplayed={1}
-                pageRangeDisplayed={3}
+                // pageRangeDisplayed={3}
                 onPageChange={handlePageClick}
                 containerClassName={s.pagination_list}
                 pageClassName={s.list_item}

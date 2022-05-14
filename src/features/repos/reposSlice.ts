@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { queryParams } from "../../enums/queryParams";
 
-const PAGE_SIZE: number = 4;
-const PAGE = 1;
+// const PAGE_SIZE: number = 4;
+// const PAGE = 1;
 
 const URL = "https://api.github.com/users"; //'https://api.github.com/users/oldremain/repos'
 
@@ -25,7 +26,7 @@ export const fetchRepos = createAsyncThunk<
 >("repos/fetchRepos", async (nikname, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            `${URL}/${nikname}/repos?per_page=${PAGE_SIZE}&page=${PAGE}&sort=created`
+            `${URL}/${nikname}/repos?per_page=${queryParams.PAGE_SIZE}&page=${queryParams.PAGE}&sort=created`
         );
         const reposArray = response.data.map((item: any) => {
             const { id, name, description, html_url } = item;
