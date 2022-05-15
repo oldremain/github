@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileImage from "./Image/ProfileImage";
+import ProfileImage from "./Avatar/ProfileImage";
 import ProfileInfo from "./Info/ProfileInfo";
 
 import s from "./Profile.module.scss";

@@ -1,0 +1,28 @@
+.emptyPage {
+    //height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.emptyPage_content {
+    width: 210px;
+    text-align: center;
+
+    & svg[height] {
+        height: 65px;
+    }
+    & svg[width] {
+        width: 75px;
+    }
+
+    & svg {
+        //margin-bottom: 10px;
+    }
+}
+
+.emptyPage_text {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 140%;
+    color: var(--secondary-color);
+}

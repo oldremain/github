@@ -1,15 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-//import delayAdapterEnhancer from "axios-delay";
-
-// const api: AxiosInstance = axios.create({
-//     adapter: delayAdapterEnhancer(axios.defaults.adapter),
-// });
-
-//   api.get('url', {
-//     delay: 1000 // delay 1 second
-//   });
-// Добавил таймаут в axios.get()
 
 type UserType = {
     name: string;
@@ -24,6 +14,7 @@ type UserType = {
 type userStateType = {
     user: UserType;
     loading: boolean;
+    error: boolean;
 };
 
 const initialState: userStateType = {
@@ -37,6 +28,7 @@ const initialState: userStateType = {
         html_url: "",
     },
     loading: false,
+    error: false,
 };
 
 const URL = "https://api.github.com/users/";
@@ -47,7 +39,7 @@ export const fetchUser = createAsyncThunk<
     { rejectValue: string }
 >("user/fetchUser", async (nikname, { rejectWithValue }) => {
     try {
-        //await new Promise((resolve) => setTimeout(() => resolve(1), 3000));
+        await new Promise((resolve) => setTimeout(() => resolve(1), 3000));
         const response = await axios.get(`${URL}${nikname}`);
         const {
             name,
@@ -83,6 +75,7 @@ const userSlice = createSlice({
         builder
             .addCase(fetchUser.pending, (state, action) => {
                 state.loading = true;
+                state.error = false;
             })
             .addCase(
                 fetchUser.fulfilled,
@@ -92,7 +85,9 @@ const userSlice = createSlice({
                 }
             )
             .addCase(fetchUser.rejected, (state, action) => {
-                console.log("User rejected");
+                console.log("User rejected", action.payload);
+                state.loading = false;
+                state.error = true;
             });
     },
 });

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-//import { queryParams } from "../../enums/queryParams";
 
 export const PAGE_SIZE: number = 4;
 
@@ -17,6 +16,7 @@ type ReposStateType = {
     list: RepoType[];
     page?: number;
     loading: boolean;
+    error: boolean;
 };
 
 type QueryParamsType = {
@@ -33,7 +33,7 @@ export const fetchRepos = createAsyncThunk<
         //await new Promise((resolve) => setTimeout(() => resolve(1), 5000));
 
         const response = await axios.get(
-            `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
+            `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created&type=member`
         );
         const reposArray = response.data.map((item: any) => {
             const { id, name, description, html_url } = item;
@@ -53,6 +53,7 @@ const initialState: ReposStateType = {
     list: [],
     page: undefined,
     loading: false,
+    error: false,
 };
 
 const reposSlice = createSlice({
@@ -68,6 +69,7 @@ const reposSlice = createSlice({
             .addCase(fetchRepos.pending, (state, action) => {
                 console.log("Repos is pending", action.payload);
                 state.loading = true;
+                state.error = false;
             })
             .addCase(
                 fetchRepos.fulfilled,
@@ -78,6 +80,8 @@ const reposSlice = createSlice({
             )
             .addCase(fetchRepos.rejected, (state, action) => {
                 console.log("Repos rejected");
+                state.error = true;
+                state.loading = false;
             });
     },
 });
