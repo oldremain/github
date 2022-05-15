@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useNavigate } from "react-router-dom";
 import { fetchRepos } from "../../features/repos/reposSlice";
 import { PAGE_SIZE } from "../../constants/constants";
 
@@ -31,13 +32,16 @@ const getCurrentPageInfo = (pageSize: number, reposCount: number, currentPage?: 
 
 const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const navigate = useNavigate()
 
     const dispatch = useAppDispatch();
     const login = useAppSelector((state) => state.user.user.login);
 
     const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page)
-        dispatch(fetchRepos({ login, page }));        
+        dispatch(fetchRepos({ login, page })); 
+        
+        navigate(`users/${login}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`)             
     };
 
     const itemsQtyInfo = getCurrentPageInfo(PAGE_SIZE, public_repos, currentPage);
