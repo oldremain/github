@@ -1,5 +1,4 @@
 .main_profile {
-    //width: 280px;
     grid-area: profile;
 
     .profile_img {
@@ -20,12 +19,14 @@
         display: flex;
         flex-direction: column;
     }
+
     .profile_name {
         font-weight: 600;
         font-size: 26px;
         line-height: 130%;
         margin-bottom: 12px;
     }
+    
     .profile_userName {
         font-weight: 400;
         font-size: 18px;
@@ -60,11 +61,8 @@
 
 @media (max-width: 992px) {
     .main_profile {
-        // height: 250px;
-        // width: 250px;
-        justify-items: center;
-
         display: flex;
+        justify-items: center;
         gap: 20px;
 
         .profile_img {
@@ -107,20 +105,3 @@
     }
 }
 
-// @media (max-width: 390px) {
-//     .main_profile {
-//         display: flex;
-
-//         .profile_img {
-//             height: 150px;
-//             width: 150px;
-//         }
-
-//         .profile_info {
-//             align-items: flex-end;
-//         }
-//         .follower {
-//             text-align: end;
-//         }
-//     }
-// }

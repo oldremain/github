@@ -1,6 +1,6 @@
 import React from "react";
-import InitialPage from "../initialPage/InitialPage";
-import UserNotFound from "../userNotFound/UserNotFound";
+//import InitialPage from "../initialPage/InitialPage";
+//import UserNotFound from "../userNotFound/UserNotFound";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { ReactComponent as NotFoundIcon } from "../../assets/notfound.svg";
 import { ReactComponent as EmptyRep } from "../../assets/emptyRep.svg";

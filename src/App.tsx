@@ -3,15 +3,12 @@ import { useAppSelector } from "./hooks/hooks";
 
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
-import InitialPage from "./components/initialPage/InitialPage";
-import UserNotFound from "./components/userNotFound/UserNotFound";
 import Loader from "./components/loader/Loader";
-
-import s from "./App.module.scss";
 import EmptyPage from "./components/emptyPage/EmptyPage";
-import { emptyPageText } from "./enums/emptyPageText";
 import { ReactComponent as NotFoundIcon } from "./assets/notfound.svg";
 import { ReactComponent as SearchIcon } from "./assets/search.svg";
+
+import s from "./App.module.scss";
 
 const App: React.FC = () => {
     const isReposLoading = useAppSelector((state) => state.repos.loading);
@@ -25,18 +22,15 @@ const App: React.FC = () => {
         <div className={s.app}>
             <Header />
 
-            {/* //show, what can make with this checkouts */}
             {isLoading && !error && <Loader />}
 
-            {login && !error && !isUserLoading && <Main />}
+            {error && <EmptyPage svg={<NotFoundIcon />} text="userNotFound" />}
 
-            {/* {!login && !isLoading && !error && <InitialPage />} */}
+            {login && !error && !isUserLoading && <Main />}
 
             {!login && !isLoading && !error && (
                 <EmptyPage svg={<SearchIcon />} text="initial" />
             )}
-
-            {error && <EmptyPage svg={<NotFoundIcon />} text="userNotFound" />}
         </div>
     );
 };

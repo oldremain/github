@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchFieldReducer from "../features/searchField/searchFieldSlice";
+//import searchFieldReducer from "../features/searchField/searchFieldSlice";
 import userReducer from "../features/user/userSlice";
 import reposReducer from "../features/repos/reposSlice";
 
 export const store = configureStore({
     reducer: {
-        searchField: searchFieldReducer,
+        //searchField: searchFieldReducer,
         user: userReducer,
         repos: reposReducer,
     },

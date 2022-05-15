@@ -20,7 +20,7 @@ type ReposStateType = {
 };
 
 type QueryParamsType = {
-    searchFieldValue: string;
+    searchValue?: string;
     page?: number;
 };
 
@@ -28,12 +28,12 @@ export const fetchRepos = createAsyncThunk<
     RepoType[],
     QueryParamsType,
     { rejectValue: string }
->("repos/fetchRepos", async ({ searchFieldValue, page = 1 }, thunkApi) => {
+>("repos/fetchRepos", async ({ searchValue = '', page = 1 }, thunkApi) => {
     try {
         //await new Promise((resolve) => setTimeout(() => resolve(1), 5000));
 
         const response = await axios.get(
-            `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
+            `${URL}/${searchValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
         );
         const reposArray = response.data.map((item: any) => {
             const { id, name, description, html_url } = item;

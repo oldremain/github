@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { updateValue } from "../../../features/searchField/searchFieldSlice";
+//import { updateValue } from "../../../features/searchField/searchFieldSlice";
 import { fetchUser } from "../../../features/user/userSlice";
 import { fetchRepos } from "../../../features/repos/reposSlice";
 
@@ -9,24 +9,28 @@ import { ReactComponent as SearchIcon } from "../../../assets/search.svg";
 import s from "./SearchBar.module.scss";
 
 const SearchBar: React.FC = () => {
-    const searchFieldValue = useAppSelector((state) => state.searchField.value);
+    const [searchValue, setSearchValue] = useState("")
+    console.log(searchValue)
+    //const searchFieldValue = useAppSelector((state) => state.searchField.value);
     const dispatch = useAppDispatch();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateValue(e.target.value));
+        //dispatch(updateValue(e.target.value));
+        setSearchValue(e.target.value)
     };
 
-    const formHandler = (e: React.FormEvent<EventTarget>) => {
+    const handleFormSubmit = (e: React.FormEvent<EventTarget>) => {
         e.preventDefault();
 
-        dispatch(fetchUser(searchFieldValue));
-        dispatch(fetchRepos({ searchFieldValue }));
-        dispatch(updateValue(""));
+        dispatch(fetchUser(searchValue));
+        dispatch(fetchRepos({ searchValue }));
+        setSearchValue("")
+       // dispatch(updateValue(""));
     };
 
     return (
         <div className={s.search_wrap}>
-            <form className={s.search_form} onSubmit={formHandler}>
+            <form className={s.search_form} onSubmit={handleFormSubmit}>
                 <button type="submit" className={s.search_button}>
                     <SearchIcon />
                 </button>
@@ -34,7 +38,7 @@ const SearchBar: React.FC = () => {
                     Searchfield by username
                 </label>
                 <input
-                    value={searchFieldValue}
+                    value={searchValue}
                     onChange={handleInputChange}
                     type="text"
                     id="search-input"

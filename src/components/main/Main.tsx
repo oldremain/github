@@ -3,11 +3,10 @@ import { useAppSelector } from "../../hooks/hooks";
 
 import Profile from "./Profile/Profile";
 import Repositories from "./Repositories/Repositories";
-import ReposNotFound from "../reposNotFound/ReposNotFound";
+import EmptyPage from "../emptyPage/EmptyPage";
 import { ReactComponent as EmptyRep } from "../../assets/emptyRep.svg";
 
 import s from "./Main.module.scss";
-import EmptyPage from "../emptyPage/EmptyPage";
 
 const Main: React.FC = () => {
     const repos = useAppSelector((state) => state.repos.list);
@@ -17,11 +16,11 @@ const Main: React.FC = () => {
             <main className={s.main_container}>
                 <Profile />
 
-                {!repos.length ? (
-                    <EmptyPage svg={<EmptyRep />} text="noRepos" />
-                ) : (
-                    <Repositories />
-                )}
+                {!repos.length 
+                    ? 
+                        <EmptyPage svg={<EmptyRep />} text="noRepos" />
+                    : 
+                        <Repositories />}
             </main>
         </div>
     );

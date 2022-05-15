@@ -10,22 +10,16 @@ const getFollowerCount = (value: number): string => {
     if (value >= 1000 && value < 1e6) {
         const result = (Math.floor(value / 100) / 10).toString();
 
-        return result.endsWith("0") ? Math.trunc(+result) + "k" : result + "k";
+        return result.endsWith("0") 
+            ? Math.trunc(+result) + "k" 
+            : result + "k";
     } else {
         return value.toFixed();
     }
 };
 
-const Info: React.FC = () => {
-    const {
-        name,
-        login,
-        followers,
-        following,
-        public_repos,
-        avatar_url,
-        html_url,
-    } = useAppSelector((state) => state.user.user);
+const ProfileInfo: React.FC = () => {
+    const {name, login, followers, following, html_url,} = useAppSelector((state) => state.user.user);
 
     return (
         <>
@@ -54,4 +48,4 @@ const Info: React.FC = () => {
     );
 };
 
-export default Info;
+export default ProfileInfo;

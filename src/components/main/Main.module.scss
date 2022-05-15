@@ -1,14 +1,16 @@
 .main {
     height: 100%;
     padding: 40px 56px;
+
+    .main_container {
+        display: grid;
+        grid-template-columns: 298px 1fr;
+        grid-template-areas: "profile repos";
+        column-gap: 85px;
+    }
 }
 
-.main_container {
-    display: grid;
-    grid-template-columns: 298px 1fr;
-    grid-template-areas: "profile repos";
-    column-gap: 85px;
-}
+
 
 @media (max-width: 992px) {
     .main {

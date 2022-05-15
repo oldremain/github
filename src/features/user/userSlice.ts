@@ -2,13 +2,13 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 type UserType = {
-    name: string;
-    login: string;
+    name?: string;
+    login?: string;
     followers: number;
     following: number;
     public_repos: number;
-    avatar_url: string;
-    html_url: string;
+    avatar_url?: string;
+    html_url?: string;
 };
 
 type userStateType = {
@@ -18,50 +18,26 @@ type userStateType = {
 };
 
 const initialState: userStateType = {
-    user: {
-        name: "",
-        login: "",
-        followers: 0,
-        following: 0,
-        public_repos: 0,
-        avatar_url: "",
-        html_url: "",
-    },
+    user: {public_repos: 0, followers: 0, following: 0},
     loading: false,
     error: false,
 };
 
 const URL = "https://api.github.com/users/";
 
-export const fetchUser = createAsyncThunk<
-    UserType,
-    string,
-    { rejectValue: string }
->("user/fetchUser", async (nikname, { rejectWithValue }) => {
-    try {
-        await new Promise((resolve) => setTimeout(() => resolve(1), 3000));
-        const response = await axios.get(`${URL}${nikname}`);
-        const {
-            name,
-            login,
-            followers,
-            following,
-            public_repos,
-            avatar_url,
-            html_url,
-        } = response.data;
+export const fetchUser = createAsyncThunk<UserType, string, { rejectValue: string }>(
+    "user/fetchUser", 
+     async (nickname, { rejectWithValue }) => {
+        try {
+            await new Promise((resolve) => setTimeout(() => resolve(1), 3000));
+            const response = await axios.get(`${URL}${nickname}`);
+            const {name, login, followers, following, public_repos, avatar_url, html_url} = response.data;
 
-        const user = {
-            name,
-            login,
-            followers,
-            following,
-            public_repos,
-            avatar_url,
-            html_url,
-        };
+            return { name, login, followers, following, public_repos, avatar_url, html_url }
 
-        return user;
+        // const user = {name, login, followers, following, public_repos, avatar_url, html_url}
+
+        // return user;
     } catch (e: any) {
         return rejectWithValue(e.message);
     }
@@ -73,7 +49,7 @@ const userSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUser.pending, (state, action) => {
+            .addCase(fetchUser.pending, (state) => {
                 state.loading = true;
                 state.error = false;
             })
@@ -85,7 +61,7 @@ const userSlice = createSlice({
                 }
             )
             .addCase(fetchUser.rejected, (state, action) => {
-                console.log("User rejected", action.payload);
+                //console.log("User rejected", action.payload);
                 state.loading = false;
                 state.error = true;
             });

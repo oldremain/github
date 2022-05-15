@@ -8,9 +8,7 @@ import s from "./Repositories.module.scss";
 
 const Repositories: React.FC = () => {
     const repos = useAppSelector((state) => state.repos.list);
-    const { public_repos, html_url } = useAppSelector(
-        (state) => state.user.user
-    );
+    const { public_repos } = useAppSelector((state) => state.user.user);
 
     return (
         <>
