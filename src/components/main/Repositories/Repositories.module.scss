@@ -1,4 +1,5 @@
 .main_repositories {
+    grid-area: repos;
 }
 .repositories_title {
     font-weight: 600;
@@ -31,4 +32,22 @@
     font-size: 16px;
     line-height: 118%;
     color: var(--text-color);
+}
+
+@media (max-width: 992px) {
+    .main_repositories {
+        justify-self: stretch;
+    }
+}
+
+@media (max-width: 568px) {
+    .repositories_title {
+        font-size: 28px;
+    }
+    .repository_name {
+        font-size: 22px;
+    }
+    .repository_description {
+        font-size: 15px;
+    }
 }

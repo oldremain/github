@@ -33,7 +33,7 @@ export const fetchRepos = createAsyncThunk<
         //await new Promise((resolve) => setTimeout(() => resolve(1), 5000));
 
         const response = await axios.get(
-            `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created&type=member`
+            `${URL}/${searchFieldValue}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
         );
         const reposArray = response.data.map((item: any) => {
             const { id, name, description, html_url } = item;

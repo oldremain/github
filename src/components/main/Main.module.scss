@@ -6,5 +6,32 @@
 .main_container {
     display: grid;
     grid-template-columns: 298px 1fr;
+    grid-template-areas: "profile repos";
     column-gap: 85px;
+}
+
+@media (max-width: 992px) {
+    .main {
+        padding: 60px 56px;
+
+        .main_container {
+            gap: 50px 0px;
+            justify-items: center;
+            grid-template-areas:
+                "profile profile"
+                "repos repos";
+        }
+    }
+}
+
+@media (max-width: 568px) {
+    .main {
+        padding: 60px 30px 30px;
+    }
+}
+
+@media (max-width: 450px) {
+    .main {
+        padding: 60px 10px;
+    }
 }
