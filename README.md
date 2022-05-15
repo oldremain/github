@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project is available by next link [paralect-github-page](https://paralect-github-page.netlify.app).
+This project is available by next link ### [paralect-github-page](https://paralect-github-page.netlify.app).
 
 ## Available Scripts
 
