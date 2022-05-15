@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-//import { updateValue } from "../../../features/searchField/searchFieldSlice";
+import { useAppDispatch} from "../../../hooks/hooks";
 import { fetchUser } from "../../../features/user/userSlice";
 import { fetchRepos } from "../../../features/repos/reposSlice";
 
@@ -9,23 +8,19 @@ import { ReactComponent as SearchIcon } from "../../../assets/search.svg";
 import s from "./SearchBar.module.scss";
 
 const SearchBar: React.FC = () => {
-    const [searchValue, setSearchValue] = useState("")
-    console.log(searchValue)
-    //const searchFieldValue = useAppSelector((state) => state.searchField.value);
+    const [login, setLogin] = useState<string>("")
     const dispatch = useAppDispatch();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        //dispatch(updateValue(e.target.value));
-        setSearchValue(e.target.value)
+        setLogin(e.target.value)
     };
 
     const handleFormSubmit = (e: React.FormEvent<EventTarget>) => {
         e.preventDefault();
 
-        dispatch(fetchUser(searchValue));
-        dispatch(fetchRepos({ searchValue }));
-        setSearchValue("")
-       // dispatch(updateValue(""));
+        dispatch(fetchUser(login));
+        dispatch(fetchRepos({ login }));
+        setLogin("")
     };
 
     return (
@@ -38,7 +33,7 @@ const SearchBar: React.FC = () => {
                     Searchfield by username
                 </label>
                 <input
-                    value={searchValue}
+                    value={login}
                     onChange={handleInputChange}
                     type="text"
                     id="search-input"

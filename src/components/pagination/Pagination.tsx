@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { fetchRepos, PAGE_SIZE } from "../../features/repos/reposSlice";
+import { fetchRepos } from "../../features/repos/reposSlice";
+import { PAGE_SIZE } from "../../constants/constants";
 
 import MuiPagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import PaginationItem from "@mui/material/PaginationItem";
 
 import s from "./Pagination.module.scss";
+
 
 interface IPaginationProps {
     public_repos: number;
@@ -28,22 +30,17 @@ const getCurrentPageInfo = (pageSize: number, reposCount: number, currentPage?: 
 };
 
 const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
-    //const [page, setPage] = useState<number>(0);//нумерация страниц начинается с нуля
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     const dispatch = useAppDispatch();
-    const currentPage = useAppSelector((state) => state.repos.page);
+    const login = useAppSelector((state) => state.user.user.login);
 
-    const searchValue = useAppSelector((state) => state.user.user.login);
     const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
-        console.log(page);
-        dispatch(fetchRepos({ searchValue, page }));
+        setCurrentPage(page)
+        dispatch(fetchRepos({ login, page }));        
     };
 
-    const itemsQtyInfo: string = getCurrentPageInfo(
-        PAGE_SIZE,
-        public_repos,
-        currentPage
-    );
+    const itemsQtyInfo = getCurrentPageInfo(PAGE_SIZE, public_repos, currentPage);
 
     return (
         <Stack
@@ -53,25 +50,17 @@ const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
             sx={{ mt: "24px" }}
         >
             <div className={s.items_qty}>{itemsQtyInfo}</div>
+
             <MuiPagination
                 count={Math.ceil(public_repos / PAGE_SIZE)}
-                page={currentPage ? currentPage : 0}
+                page={currentPage}
                 onChange={handleChange}
                 siblingCount={1}
                 boundaryCount={2}
                 shape="rounded"
                 color="primary"
                 size="small"
-                renderItem={(item) => {
-                    if (item.type === "next" || item.type === "previous") {
-                        return (
-                            <PaginationItem
-                                sx={{ color: "#808080", fontSize: "14px" }}
-                                {...item}
-                            />
-                        );
-                    }
-                    return (
+                renderItem={(item) => (
                         <PaginationItem
                             sx={{
                                 color: "#808080",
@@ -79,8 +68,7 @@ const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
                             }}
                             {...item}
                         />
-                    );
-                }}
+                    )}
             />
         </Stack>
     );

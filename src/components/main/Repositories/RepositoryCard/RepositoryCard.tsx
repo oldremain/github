@@ -1,5 +1,5 @@
 import React from "react";
-import { RepoType } from "../../../../features/repos/reposSlice";
+import { RepoType } from "../../../../features/repos/reposTypes";
 
 import s from "../Repositories.module.scss";
 
