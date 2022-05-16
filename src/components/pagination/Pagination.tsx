@@ -52,6 +52,7 @@ const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
                             sx={{
                                 color: "#808080",
                                 fontSize: "14px",
+                                "&:hover": { color: item.type !== 'page' ? "#0064eb" : ''} 
                             }}
                             {...item}
                         />
