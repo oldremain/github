@@ -21,11 +21,13 @@ const SearchBar: React.FC = () => {
     const handleFormSubmit = (e: React.FormEvent<EventTarget>) => {
         e.preventDefault();
 
-        dispatch(fetchUser(login));
-        dispatch(fetchRepos({ login }));
-        setLogin("")
+        if (login) {
+            dispatch(fetchUser(login));
+            dispatch(fetchRepos({ login }));
+            setLogin("")
 
-        navigate(`users/${login}`)
+            navigate(`users/${login}`)
+        }
     };
 
     return (
