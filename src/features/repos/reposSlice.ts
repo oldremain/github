@@ -10,12 +10,10 @@ export const fetchRepos = createAsyncThunk<RepoType[], QueryParamsType, { reject
                 const response = await axios.get(
                     `${URL}/${login}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`
                 );
-                const reposArray = response.data.map((item: any) => {
-                    const { id, name, description, html_url } = item;
-                    return { id, name, description, html_url };
-                });
 
-                return reposArray;
+                return response.data.map(({ id, name, description, html_url }: RepoType) => 
+                            ({ id, name, description, html_url })
+                );
             } catch (e: any) {
                 return rejectWithValue(e.message);
             }
