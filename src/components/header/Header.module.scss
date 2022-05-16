@@ -7,3 +7,9 @@
     height: 72px;
     background-color: var(--primary-color);
 }
+
+@media (max-width: 550px) {
+    .header {
+        padding: 0px 20px;
+    }
+}

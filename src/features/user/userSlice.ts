@@ -13,7 +13,7 @@ export const fetchUser = createAsyncThunk<UserType, string, { rejectValue: strin
     "user/fetchUser", 
      async (nickname, { rejectWithValue }) => {
         try {
-            //await new Promise((resolve) => setTimeout(() => resolve(1), 500));
+            await new Promise((resolve) => setTimeout(() => resolve(1), 500));
 
             const response = await axios.get(`${URL}/${nickname}`);
             const {name, login, followers, following, public_repos, avatar_url, html_url} = response.data;

@@ -16,7 +16,7 @@ const RepositoryCard: React.FC<RepoType> = ({ name, description, html_url }) => 
                 >
                     {name}
                 </a>
-                <p className={s.repository_description}>{description}</p>
+                <p className={s.repository_description}>{!!description ? description : '-'}</p>
             </div>
         </>
     );
