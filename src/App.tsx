@@ -24,13 +24,13 @@ const App: React.FC = () => {
 
             {isLoading && !error && <Loader />}
 
-            {error && <EmptyPage svg={<NotFoundIcon />} text="userNotFound" />}
-
-            {login && !error && !isUserLoading && <Main />}
-
             {!login && !isLoading && !error && (
                 <EmptyPage svg={<SearchIcon />} text="initial" />
             )}
+
+            {error && <EmptyPage svg={<NotFoundIcon />} text="userNotFound" />}
+
+            {login && !error && !isUserLoading && <Main />}            
         </div>
     );
 };

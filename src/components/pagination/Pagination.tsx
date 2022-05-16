@@ -1,34 +1,17 @@
 import React, {useState} from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchRepos } from "../../features/repos/reposSlice";
+import { getCurrentPageInfo } from '../../helpers/functions'
 import { PAGE_SIZE } from "../../constants/constants";
 
-import MuiPagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import PaginationItem from "@mui/material/PaginationItem";
+import { Pagination as MuiPagination, Stack, PaginationItem } from "@mui/material";
 
 import s from "./Pagination.module.scss";
-
 
 interface IPaginationProps {
     public_repos: number;
 }
-
-const getCurrentPageInfo = (pageSize: number, reposCount: number, currentPage?: number): string => {
-    if (currentPage) {
-       const from = currentPage * pageSize - (pageSize - 1);
-       const to = currentPage * pageSize > reposCount
-                ? reposCount
-                : currentPage * pageSize;
-
-    return from === to
-        ? `${from} of ${reposCount} item(s)`
-        : `${from}-${to} of ${reposCount} item(s)`;
-    } else {
-        return ''
-    }
-};
 
 const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -37,7 +20,7 @@ const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
     const dispatch = useAppDispatch();
     const login = useAppSelector((state) => state.user.user.login);
 
-    const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    const handleChangePage = (event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page)
         dispatch(fetchRepos({ login, page })); 
         
@@ -58,7 +41,7 @@ const Pagination: React.FC<IPaginationProps> = ({ public_repos }) => {
             <MuiPagination
                 count={Math.ceil(public_repos / PAGE_SIZE)}
                 page={currentPage}
-                onChange={handleChange}
+                onChange={handleChangePage}
                 siblingCount={1}
                 boundaryCount={2}
                 shape="rounded"

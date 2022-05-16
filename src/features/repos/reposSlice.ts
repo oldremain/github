@@ -33,7 +33,7 @@ const reposSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchRepos.pending, (state, action) => {
+            .addCase(fetchRepos.pending, (state) => {
                 state.loading = true;
                 state.error = false;
             })
@@ -44,7 +44,7 @@ const reposSlice = createSlice({
                     state.list = action.payload;
                 }
             )
-            .addCase(fetchRepos.rejected, (state, action) => {
+            .addCase(fetchRepos.rejected, (state) => {
                 state.error = true;
                 state.loading = false;
             });

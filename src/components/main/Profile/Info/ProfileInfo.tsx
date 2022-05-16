@@ -1,22 +1,11 @@
 import React from "react";
 import { useAppSelector } from "../../../../hooks/hooks";
+import { getFollowerCount } from '../../../../helpers/functions'
 
-import { ReactComponent as Followers } from "../../../../assets/followers.svg";
-import { ReactComponent as Following } from "../../../../assets/following.svg";
+import { ReactComponent as FollowersIcon } from "../../../../assets/followers.svg";
+import { ReactComponent as FollowingIcon } from "../../../../assets/following.svg";
 
 import s from "../Profile.module.scss";
-
-const getFollowerCount = (value: number): string => {
-    if (value >= 1000 && value < 1e6) {
-        const result = (Math.floor(value / 100) / 10).toString();
-
-        return result.endsWith("0") 
-            ? Math.trunc(+result) + "k" 
-            : result + "k";
-    } else {
-        return value.toFixed();
-    }
-};
 
 const ProfileInfo: React.FC = () => {
     const {name, login, followers, following, html_url,} = useAppSelector((state) => state.user.user);
@@ -35,11 +24,11 @@ const ProfileInfo: React.FC = () => {
                 </a>
                 <div className={s.profile_statistic}>
                     <div className={s.profile_followers}>
-                        <Followers />
+                        <FollowersIcon />
                         <span>{getFollowerCount(followers)} followers</span>
                     </div>
                     <div className={s.profile_following}>
-                        <Following />
+                        <FollowingIcon />
                         <span>{getFollowerCount(following)} following</span>
                     </div>
                 </div>

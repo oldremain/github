@@ -3,11 +3,8 @@ import { RepoType } from "../../../../features/repos/reposTypes";
 
 import s from "../Repositories.module.scss";
 
-const RepositoryCard: React.FC<RepoType> = ({
-    name,
-    description,
-    html_url,
-}) => {
+const RepositoryCard: React.FC<RepoType> = ({ name, description, html_url }) => {
+    
     return (
         <>
             <div className={s.repository_card}>

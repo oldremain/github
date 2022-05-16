@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch} from "../../../hooks/hooks";
 import { fetchUser } from "../../../features/user/userSlice";
 import { fetchRepos } from "../../../features/repos/reposSlice";
-import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as SearchIcon } from "../../../assets/search.svg";
 
