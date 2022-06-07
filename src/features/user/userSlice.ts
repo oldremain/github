@@ -4,7 +4,12 @@ import { UserType, UserStateType } from "./userTypes";
 import { URL } from '../../constants/constants'
 
 const initialState: UserStateType = {
-    user: {public_repos: 0, followers: 0, following: 0},
+    user: {
+        login: '', 
+        public_repos: 0, 
+        followers: 0, 
+        following: 0
+    },
     loading: false,
     error: false,
 };

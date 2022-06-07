@@ -13,6 +13,6 @@ export type ReposStateType = {
 };
 
 export type QueryParamsType = {
-    login?: string;
-    page?: number;
+    login: string;
+    page: number;
 };

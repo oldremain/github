@@ -5,7 +5,7 @@ import { PAGE_SIZE, URL } from "../../constants/constants";
 
 export const fetchRepos = createAsyncThunk<RepoType[], QueryParamsType, { rejectValue: string }>(
     "repos/fetchRepos", 
-     async ({ login = '', page = 1 }, { rejectWithValue }) => {
+     async ({ login, page }, { rejectWithValue }) => {
             try {
                 const response = await axios.get(
                     `${URL}/${login}/repos?per_page=${PAGE_SIZE}&page=${page}&sort=created`

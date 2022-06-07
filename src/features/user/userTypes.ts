@@ -1,6 +1,6 @@
 export type UserType = {
     name?: string;
-    login?: string;
+    login: string;
     followers: number;
     following: number;
     public_repos: number;
