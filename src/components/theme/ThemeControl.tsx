@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { toggleTheme } from '../../features/theme/themeSlice';
+import Tooltip from '@mui/material/Tooltip';
+import Zoom from '@mui/material/Zoom';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -60,11 +62,13 @@ const ThemeControl: React.FC = () => {
     }
 
     return (
-        <MaterialUISwitch 
-            checked={theme === 'dark'}
-            onChange={handleToggleTheme}
-            sx={{ m: 1 }} 
-        />
+        <Tooltip TransitionComponent={Zoom} title="Toggle theme" arrow>
+            <MaterialUISwitch 
+                checked={theme === 'dark'}
+                onChange={handleToggleTheme}
+                sx={{ m: 1 }} 
+            />
+        </Tooltip>
     );
   }
 
