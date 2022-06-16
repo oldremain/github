@@ -16,11 +16,11 @@ const Repositories: React.FC = () => {
                 <h3 className={s.repositories_title}>
                     Repositories ({public_repos})
                 </h3>
-                <div className={s.repositories_layout}>
+                <ul className={s.repositories_list}>
                     {repos.map((repo) => (
                         <RepositoryCard key={repo.id} {...repo} />
                     ))}
-                </div>
+                </ul>
                 <Pagination public_repos={public_repos} />
             </div>
         </>
