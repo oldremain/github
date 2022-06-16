@@ -21,7 +21,13 @@
         height: 100%;
     }
 }
-
+.page_icon__dark {
+    svg {
+        path {
+            fill: var(--secondary-color)
+        }
+    }
+}
 .page_text {
     font-weight: 400;
     font-size: 22px;

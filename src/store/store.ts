@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "../features/user/userSlice";
-import reposReducer from "../features/repos/reposSlice";
+import userSlice from "../features/user/userSlice";
+import reposSlice from "../features/repos/reposSlice";
+import themeSlice from "../features/theme/themeSlice";
 
 export const store = configureStore({
     reducer: {
-        user: userReducer,
-        repos: reposReducer,
+        user: userSlice,
+        repos: reposSlice,
+        theme: themeSlice
     },
 });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "./hooks/hooks";
 
 import Header from "./components/header/Header";
@@ -11,12 +11,19 @@ import { ReactComponent as SearchIcon } from "./assets/search.svg";
 import s from "./App.module.scss";
 
 const App: React.FC = () => {
+    const theme = useAppSelector(state => state.theme.theme)
     const isReposLoading = useAppSelector((state) => state.repos.loading);
     const isUserLoading = useAppSelector((state) => state.user.loading);
     const { login } = useAppSelector((state) => state.user.user);
     const { error } = useAppSelector((state) => state.user);
 
     const isLoading = isReposLoading || isUserLoading;
+
+    const bodyRef = useRef<HTMLBodyElement | null>(null)
+
+    useEffect(() => {
+        document.body.dataset.theme = theme
+    }, [])
 
     return (
         <div className={s.app}>

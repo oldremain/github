@@ -8,6 +8,10 @@
     background-color: var(--primary-color);
 }
 
+.header > :last-child {
+    margin-left: auto;
+}
+
 @media (max-width: 550px) {
     .header {
         padding: 0px 20px;
